@@ -1,34 +1,35 @@
-import React, { useState } from 'react';
-import LanguageSelector from './components/LanguageSelector';
-import FarmerForm from './components/FarmerForm';
-import Results from './components/Results';
+import React, { useState } from "react";
+import "./i18n/i18n";
+import LanguageSelector from "./components/LanguageSelector";
+import FarmerForm from "./components/FarmerForm";
+import Results from "./components/Results";
 
-function App() {
+export default function App() {
   const [language, setLanguage] = useState(null);
-  const [details, setDetails] = useState(null);
+  const [farmerDetails, setFarmerDetails] = useState(null);
 
-  const handleLanguageSelect = (lang) => {
-    setLanguage(lang);
-  };
+  return (
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center p-4">
+      <h1 className="text-3xl font-bold mt-8 text-green-700 mb-6">
+        🌱 Smart Agri Advisor
+      </h1>
 
-  const handleFormSubmit = (formData) => {
-    setDetails(formData);
-  };
+      {!language && <LanguageSelector onSelect={setLanguage} />}
 
-  const handleReset = () => {
-    setLanguage(null);
-    setDetails(null);
-  };
+      {language && !farmerDetails && (
+        <FarmerForm language={language} onSubmit={setFarmerDetails} />
+      )}
 
-  if (!language) {
-    return <LanguageSelector onSelect={handleLanguageSelect} />;
-  }
-
-  if (!details) {
-    return <FarmerForm language={language} onSubmit={handleFormSubmit} />;
-  }
-
-  return <Results language={language} details={details} onReset={handleReset} />;
+      {language && farmerDetails && (
+        <Results
+          language={language}
+          farmerDetails={farmerDetails}
+          onReset={() => {
+            setLanguage(null);
+            setFarmerDetails(null);
+          }}
+        />
+      )}
+    </div>
+  );
 }
-
-export default App;

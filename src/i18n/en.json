@@ -1,0 +1,15 @@
+{
+  "selectLanguage": "Select Language",
+  "form": {
+    "title": "Farm Details",
+    "state": "State",
+    "district": "District",
+    "crop": "Crop",
+    "farmSize": "Farm Size (in acres)",
+    "submit": "Get Price & Schemes"
+  },
+  "result": {
+    "predictedPrice": "Predicted Price",
+    "schemes": "Available Schemes"
+  }
+}
